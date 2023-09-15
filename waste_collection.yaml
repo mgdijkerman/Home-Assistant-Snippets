@@ -1,0 +1,221 @@
+alias: Update ESL Bins
+description: Update the E Paper Display with data from the garbage collection
+trigger:
+  - platform: time
+    at: "02:00:00"
+condition: []
+action:
+  - service: open_epaper_link.drawcustom
+    target:
+      entity_id: open_epaper_link.0000021B48FC3B1E
+    data:
+      background: white
+      rotate: 0
+      payload:
+        - type: line
+          fill: red
+          width: 3
+          x_start: 5
+          y_start: 64
+          x_end: 121
+          y_end: 64
+        - type: line
+          fill: red
+          width: 3
+          x_start: 175
+          y_start: 64
+          x_end: 291
+          y_end: 64
+        - type: line
+          fill: red
+          width: 3
+          x_start: 148
+          y_start: 5
+          x_end: 148
+          y_end: 37
+        - type: line
+          fill: red
+          width: 3
+          x_start: 148
+          y_start: 89
+          x_end: 148
+          y_end: 123
+        - type: rectangle
+          outline: white
+          fill: >-
+            {{'white' if state_attr('sensor.circulus_restafval', 'Days_until')
+            == 'unknown' or state_attr('sensor.circulus_restafval',
+            'Days_until') | int > 1 else 'red' }}
+          width: 1
+          x_start: 5
+          y_start: 5
+          x_end: 143
+          y_end: 59
+        - type: text
+          value: Restafval
+          font: ppb.ttf
+          x: 70
+          "y": 21
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_restafval', 'Days_until')
+            == 'unknown' or state_attr('sensor.circulus_restafval',
+            'Days_until') | int > 1 else 'white' }}
+        - type: text
+          value: >-
+            {% if state_attr('sensor.circulus_restafval', 'Days_until') ==
+            'unknown' %}Onbekend{% elif state_attr('sensor.circulus_restafval',
+            'Days_until') | int == 0 %}Vandaag{% elif
+            state_attr('sensor.circulus_restafval', 'Days_until') | int == 1
+            %}Vanavond{% else %}{{state_attr('sensor.circulus_restafval',
+            'Days_until')}} dagen{% endif %}
+          font: ppb.ttf
+          x: 70
+          "y": 43
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_restafval', 'Days_until')
+            == 'unknown' or state_attr('sensor.circulus_restafval',
+            'Days_until') | int > 1 else 'white' }}
+        - type: rectangle
+          outline: white
+          fill: >-
+            {{'white' if state_attr('sensor.circulus_papier', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_papier', 'Days_until') |
+            int > 1 else 'red' }}
+          width: 1
+          x_start: 153
+          y_start: 5
+          x_end: 291
+          y_end: 59
+        - type: text
+          value: Papier
+          font: ppb.ttf
+          x: 226
+          "y": 21
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_papier', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_papier', 'Days_until') |
+            int > 1 else 'white' }}
+        - type: text
+          value: >-
+            {% if state_attr('sensor.circulus_papier', 'Days_until') ==
+            'unknown' %}Onbekend{% elif state_attr('sensor.circulus_papier',
+            'Days_until') | int == 0 %}Vandaag{% elif
+            state_attr('sensor.circulus_papier', 'Days_until') | int == 1
+            %}Vanavond{% else %}{{state_attr('sensor.circulus_papier',
+            'Days_until')}} dagen{% endif %}
+          font: ppb.ttf
+          x: 226
+          "y": 43
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_papier', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_papier', 'Days_until') |
+            int > 1 else 'white' }}
+        - type: rectangle
+          outline: white
+          fill: >-
+            {{'white' if state_attr('sensor.circulus_pmd', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_pmd', 'Days_until') | int >
+            1 else 'red' }}
+          width: 1
+          x_start: 5
+          y_start: 69
+          x_end: 143
+          y_end: 123
+        - type: text
+          value: Plastic
+          font: ppb.ttf
+          x: 70
+          "y": 85
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_pmd', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_pmd', 'Days_until') | int >
+            1 else 'white' }}
+        - type: text
+          value: >-
+            {% if state_attr('sensor.circulus_pmd', 'Days_until') == 'unknown'
+            %}Onbekend{% elif state_attr('sensor.circulus_pmd', 'Days_until') |
+            int == 0 %}Vandaag{% elif state_attr('sensor.circulus_pmd',
+            'Days_until') | int == 1 %}Vanavond{% else
+            %}{{state_attr('sensor.circulus_pmd', 'Days_until')}} dagen{% endif
+            %}
+          font: ppb.ttf
+          x: 70
+          "y": 107
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_pmd', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_pmd', 'Days_until') | int >
+            1 else 'white' }}
+        - type: rectangle
+          outline: white
+          fill: >-
+            {{'white' if state_attr('sensor.circulus_gft', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_gft', 'Days_until') | int >
+            1 else 'red' }}
+          width: 1
+          x_start: 153
+          y_start: 69
+          x_end: 291
+          y_end: 123
+        - type: text
+          value: Groen
+          font: ppb.ttf
+          x: 226
+          "y": 85
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_gft', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_gft', 'Days_until') | int >
+            1 else 'white' }}
+        - type: text
+          value: >-
+            {% if state_attr('sensor.circulus_gft', 'Days_until') == 'unknown'
+            %}Onbekend{% elif state_attr('sensor.circulus_gft', 'Days_until') |
+            int == 0 %}Vandaag{% elif state_attr('sensor.circulus_gft',
+            'Days_until') | int == 1 %}Vanavond{% else
+            %}{{state_attr('sensor.circulus_gft', 'Days_until')}} dagen{% endif
+            %}
+          font: ppb.ttf
+          x: 226
+          "y": 107
+          size: 18
+          anchor: mm
+          color: >-
+            {{'black' if state_attr('sensor.circulus_gft', 'Days_until') ==
+            'unknown' or state_attr('sensor.circulus_gft', 'Days_until') | int >
+            1 else 'white' }}
+        - type: icon
+          value: circle
+          x: 113
+          "y": 29
+          size: 70
+          color: white
+        - type: icon
+          value: trash-can
+          x: 123
+          "y": 39
+          size: 50
+          color: >-
+            {{ 'red' if (([(14 if state_attr('sensor.circulus_restafval',
+            'Days_until') == 'unknown' else
+            state_attr('sensor.circulus_restafval', 'Days_until')),(14 if
+            state_attr('sensor.circulus_papier', 'Days_until') == 'unknown' else
+            state_attr('sensor.circulus_papier', 'Days_until')),(14 if
+            state_attr('sensor.circulus_gft', 'Days_until') == 'unknown' else
+            state_attr('sensor.circulus_gft', 'Days_until')),(14 if
+            state_attr('sensor.circulus_pmd', 'Days_until') == 'unknown' else
+            state_attr('sensor.circulus_pmd', 'Days_until')) ]) | min ) | int <
+            2 else 'black' }}
+mode: single
